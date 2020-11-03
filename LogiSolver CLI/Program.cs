@@ -12,7 +12,7 @@ namespace LogiSolver.CLI
 			string prevTitle = Console.Title;
 			Console.Title = "LogiSolver";
 			Console.Clear();
-			Puzzle puzzle = Puzzle.Manager.Load("puzzle.logi") ?? new Puzzle(1);
+            Puzzle puzzle = Puzzle.Manager.Load("puzzle.logi") ?? new Puzzle(false);
 			bool exit = false;
 			int selectedRow = 0;
 			int selectedCol = 0;
