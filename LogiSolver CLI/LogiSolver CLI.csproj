@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -6,6 +6,9 @@
     <RootNamespace>LogiSolver.CLI</RootNamespace>
     <StartupObject>LogiSolver.CLI.Program</StartupObject>
     <ApplicationIcon>icon.ico</ApplicationIcon>
+    <Authors>Mateusz Piotr Moruś</Authors>
+    <Company />
+    <AssemblyName>LogiSolver.CLI</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,22 +1,34 @@
 ﻿using LogiSolver.Core;
 using System;
+using System.Resources;
 
 namespace LogiSolver.CLI
 {
+
 	internal class Program
 	{
 		private static void Main(string[] args)
 		{
-			var puzzle = new Puzzle();
+			string prevTitle = Console.Title;
+			Console.Title = "LogiSolver";
+			Console.Clear();
+			Puzzle puzzle = Puzzle.Manager.Load("puzzle.logi") ?? new Puzzle(1);
 			bool exit = false;
 			int selectedRow = 0;
 			int selectedCol = 0;
-			GridPrinter.Print(puzzle.Grid, selectedRow, selectedCol);
+			Console.CursorVisible = false;
+			Console.CancelKeyPress += delegate { Environment.Exit(0); };
+			PuzzlePrinter printer = new PuzzlePrinter();
+			printer.Print(puzzle, selectedRow, selectedCol);
+			
 			while (!exit)
 			{
-				GridPrinter.Print(puzzle.Grid, selectedRow, selectedCol);
-				var key = Console.ReadKey().Key;
-				switch (key)
+				if (puzzle.Solved)
+					Console.ForegroundColor = ConsoleColor.Green;
+				else
+					Console.ResetColor();
+				printer.Print(puzzle, selectedRow, selectedCol);
+				switch (Console.ReadKey(true).Key)
 				{
 					case ConsoleKey.UpArrow:
 						if (selectedRow > 0)
@@ -24,7 +36,7 @@ namespace LogiSolver.CLI
 						break;
 
 					case ConsoleKey.DownArrow:
-						if (selectedRow < puzzle.Grid.Count - 1)
+						if (selectedRow < puzzle.Grid.RowCount - 1)
 							selectedRow++;
 						break;
 
@@ -34,7 +46,7 @@ namespace LogiSolver.CLI
 						break;
 
 					case ConsoleKey.RightArrow:
-						if (selectedCol < puzzle.Grid[0].Count - 1)
+						if (selectedCol < puzzle.Grid.ColumnCount - 1)
 							selectedCol++;
 						break;
 
@@ -45,28 +57,31 @@ namespace LogiSolver.CLI
 
 					case ConsoleKey.Backspace:
 					case ConsoleKey.Delete:
-					case ConsoleKey.Spacebar:
 						puzzle.SetCell(selectedRow, selectedCol, CellState.Unknown);
 						break;
 
 					case ConsoleKey.X:
-						puzzle.SetCell(selectedRow, selectedCol, CellState.FilledIn);
-						break;
-
 					case ConsoleKey.OemPeriod:
 						puzzle.SetCell(selectedRow, selectedCol, CellState.Empty);
 						break;
 
+					case ConsoleKey.Spacebar:
 					case ConsoleKey.Enter:
-						if (puzzle.Grid[selectedRow][selectedCol] == CellState.Empty)
-							puzzle.SetCell(selectedRow, selectedCol, CellState.FilledIn);
-						else if (puzzle.Grid[selectedRow][selectedCol] == CellState.FilledIn)
-							puzzle.SetCell(selectedRow, selectedCol, CellState.Unknown);
-						else if (puzzle.Grid[selectedRow][selectedCol] == CellState.Unknown)
-							puzzle.SetCell(selectedRow, selectedCol, CellState.Empty);
+						puzzle.SetCell(selectedRow, selectedCol, CellState.FilledIn);
+						break;
+
+					case ConsoleKey.S:
+						Puzzle.Manager.Save(puzzle, "puzzle.logi");
+						break;
+
+					case ConsoleKey.R:
+						Puzzle newPuzzle = Puzzle.Manager.Load(@"puzzles\puzzle.logi");
+						if (newPuzzle != null) puzzle = newPuzzle;
 						break;
 				}
 			}
+			//Console.Title = prevTitle;
+			Console.WriteLine();
 		}
 	}
 }
