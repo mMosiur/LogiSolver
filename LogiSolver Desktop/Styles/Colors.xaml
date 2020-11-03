@@ -1,0 +1,26 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:local="clr-namespace:LogiSolver.Desktop">
+
+	<Color x:Key="BackgroundDark">#2F4F4F</Color>
+	<SolidColorBrush x:Key="BackgroundDarkBrush" Color="{StaticResource BackgroundDark}" />
+	
+	<Color x:Key="BackgroundLight">#778899</Color>
+	<SolidColorBrush x:Key="BackgroundLightBrush" Color="{StaticResource BackgroundLight}" />
+
+	<Color x:Key="ForegroundMain">#99AABB</Color>
+	<SolidColorBrush x:Key="ForegroundMainBrush" Color="{StaticResource ForegroundMain}" />
+	
+	<Color x:Key="ForegroundVeryDark">#0F2F2F</Color>
+	<SolidColorBrush x:Key="ForegroundVeryDarkBrush" Color="{StaticResource ForegroundVeryDark}" />
+
+	<Color x:Key="ForegroundDark">#2F4F4F</Color>
+	<SolidColorBrush x:Key="ForegroundDarkBrush" Color="{StaticResource ForegroundDark}" />
+
+	<Color x:Key="ForegroundLight">#dfffff</Color>
+	<SolidColorBrush x:Key="ForegroundLightBrush" Color="{StaticResource ForegroundLight}" />
+
+	<Color x:Key="ForegroundAccent">#802080</Color>
+	<SolidColorBrush x:Key="ForegroundAccentBrush" Color="{StaticResource ForegroundAccent}" />
+
+</ResourceDictionary>
