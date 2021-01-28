@@ -5,6 +5,7 @@
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:local="clr-namespace:LogiSolver.Desktop"
 		mc:Ignorable="d"
+		d:DataContext="{d:DesignInstance Type=local:WindowViewModel}"
 		Background="Transparent"
 		WindowStyle="None"
 		WindowStartupLocation="CenterScreen"

@@ -63,9 +63,9 @@ namespace LogiSolver.Desktop.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] icon {
+        internal static byte[] new_icon {
             get {
-                object obj = ResourceManager.GetObject("icon", resourceCulture);
+                object obj = ResourceManager.GetObject("new_icon", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -73,9 +73,39 @@ namespace LogiSolver.Desktop.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] icon1 {
+        internal static byte[] new_icon128 {
             get {
-                object obj = ResourceManager.GetObject("icon1", resourceCulture);
+                object obj = ResourceManager.GetObject("new_icon128", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] new_icon24 {
+            get {
+                object obj = ResourceManager.GetObject("new_icon24", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] new_icon256 {
+            get {
+                object obj = ResourceManager.GetObject("new_icon256", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] new_icon48 {
+            get {
+                object obj = ResourceManager.GetObject("new_icon48", resourceCulture);
                 return ((byte[])(obj));
             }
         }

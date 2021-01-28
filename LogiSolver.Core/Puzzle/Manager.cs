@@ -11,13 +11,7 @@ namespace LogiSolver.Core
 		/// </summary>
 		public static class Manager
 		{
-			#region Private Members
-
 			private static string directory = null;
-
-			#endregion Private Members
-
-			#region Public Properties
 
 			/// <summary>
 			/// The path to the directory where puzzles are loaded from and saved to.
@@ -39,10 +33,6 @@ namespace LogiSolver.Core
 				}
 			}
 
-			#endregion Public Properties
-
-			#region Private Methods
-
 			/// <summary>
 			/// Loads a puzzle from a file with a given path
 			/// </summary>
@@ -53,8 +43,9 @@ namespace LogiSolver.Core
 				try
 				{
 					FileInfo file = new FileInfo(filename);
-					byte[] bytes = File.ReadAllBytes(file.FullName);
-					Puzzle puzzle = Serializer.DecodeFromBytes(bytes);
+                    byte[] bytes = File.ReadAllBytes(file.FullName);
+                    var serializer = new BinarySerializer();
+                    Puzzle puzzle = serializer.Deserialize(bytes);
 					file.LastAccessTimeUtc = DateTime.UtcNow;
 					return puzzle;
 				}
@@ -63,10 +54,6 @@ namespace LogiSolver.Core
 					return null;
 				}
 			}
-
-			#endregion Private Methods
-
-			#region Public Methods
 
 			/// <summary>
 			/// Loads a puzzle with a given name.
@@ -105,9 +92,9 @@ namespace LogiSolver.Core
 				{
 					DirectoryInfo dir = new FileInfo(filepath).Directory;
 					if (!dir.Exists)
-						dir.Create();
-
-					File.WriteAllBytes(filepath, Serializer.EncodeToBytes(puzzle));
+                        dir.Create();
+                    var serializer = new BinarySerializer();
+                    File.WriteAllBytes(filepath, serializer.Serialize(puzzle));
 				}
 				catch (Exception)
 				{
@@ -115,8 +102,6 @@ namespace LogiSolver.Core
 				}
 				return true;
 			}
-
-			#endregion Public Methods
 		}
 	}
 }

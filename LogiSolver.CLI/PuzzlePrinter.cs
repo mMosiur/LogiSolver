@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using static LogiSolver.Core.Puzzle;
 
 namespace LogiSolver.CLI
 {
@@ -9,13 +10,16 @@ namespace LogiSolver.CLI
 	{
 		public Puzzle Puzzle { get; set; }
 
-		private string CellStateToString(CellState state) => state switch
+		private static string CellStateToString(CellState state)
 		{
-			CellState.Unknown => "   ",
-			CellState.FilledIn => "▐█▌",
-			CellState.Empty => " X ",//" • ",
-			_ => " � "
-		};
+			return state switch
+			{
+				CellState.Unknown => "   ",
+				CellState.FilledIn => "▐█▌",
+				CellState.Empty => " X ",//" • ",
+				_ => " � "
+			};
+		}
 
 		private List<string> GenerateGridString(Puzzle puzzle, int selectedRow, int selectedCol)
 		{

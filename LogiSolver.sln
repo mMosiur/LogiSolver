@@ -3,14 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogiSolver Core", "LogiSolver Core\LogiSolver Core.csproj", "{DBDB3BDD-A293-48C7-BF33-D1B6242DFDB4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogiSolver.Core", "LogiSolver.Core\LogiSolver.Core.csproj", "{DBDB3BDD-A293-48C7-BF33-D1B6242DFDB4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogiSolver CLI", "LogiSolver CLI\LogiSolver CLI.csproj", "{F8D3AA5D-CAFA-4612-B3D7-B35E6187F404}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogiSolver.CLI", "LogiSolver.CLI\LogiSolver.CLI.csproj", "{F8D3AA5D-CAFA-4612-B3D7-B35E6187F404}"
 	ProjectSection(ProjectDependencies) = postProject
 		{DBDB3BDD-A293-48C7-BF33-D1B6242DFDB4} = {DBDB3BDD-A293-48C7-BF33-D1B6242DFDB4}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogiSolver Desktop", "LogiSolver Desktop\LogiSolver Desktop.csproj", "{EAB74858-7DA6-475C-9E71-E71150860C12}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogiSolver.Desktop", "LogiSolver.Desktop\LogiSolver.Desktop.csproj", "{EAB74858-7DA6-475C-9E71-E71150860C12}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -9,8 +9,6 @@ namespace LogiSolver.Core
 	/// </summary>
 	public partial class Puzzle
 	{
-		#region Constructors
-
 		/// <summary>
 		/// Constructor that creates sample puzzle.
 		/// </summary>
@@ -47,20 +45,20 @@ namespace LogiSolver.Core
 					new List<ushort>() { 6 },
 					new List<ushort>() { 4 }
 				};
-				byte[,] bytes = new byte[rowCount, colCount]
+				CellState[,] bytes = new CellState[rowCount, colCount]
 				{
-					{ 0, 0, 2, 0, 0, 0, 0, 0, 0, 0 },
-					{ 2, 2, 0, 0, 0, 0, 0, 0, 0, 2 },
-					{ 0, 0, 0, 2, 0, 0, 0, 0, 0, 0 },
+					{ 0, 0, (CellState)2, 0, 0, 0, 0, 0, 0, 0 },
+					{ (CellState)2, (CellState)2, 0, 0, 0, 0, 0, 0, 0, (CellState)2 },
+					{ 0, 0, 0, (CellState)2, 0, 0, 0, 0, 0, 0 },
 					{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-					{ 0, 0, 2, 0, 2, 0, 0, 0, 0, 0 },
+					{ 0, 0, (CellState)2, 0, (CellState)2, 0, 0, 0, 0, 0 },
 					{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
 					{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-					{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 2 },
-					{ 0, 0, 0, 0, 0, 0, 0, 0, 2, 0 },
-					{ 2, 2, 2, 0, 0, 0, 0, 2, 2, 0 }
+					{ 0, 0, 0, 0, 0, 0, 0, 0, 0, (CellState)2 },
+					{ 0, 0, 0, 0, 0, 0, 0, 0, (CellState)2, 0 },
+					{ (CellState)2, (CellState)2, (CellState)2, 0, 0, 0, 0, (CellState)2, (CellState)2, 0 }
 				};
-				Grid = new CellGrid(bytes);
+				Grid = new Grid<CellState>(bytes);
 			}
 			else
 			{
@@ -102,7 +100,7 @@ namespace LogiSolver.Core
 					new List<ushort>() { 4, 3 },
 					new List<ushort>() { 1, 3 }
 				};
-				Grid = new CellGrid(rowCount, colCount);
+				Grid = new Grid<CellState>(rowCount, colCount);
 			}
 		}
 
@@ -111,14 +109,10 @@ namespace LogiSolver.Core
 		/// </summary>
 		public Puzzle()
 		{
-			Grid = new CellGrid(0, 0);
+			Grid = new Grid<CellState>(0, 0);
 			ColumnClues = new List<ushort>[0];
 			RowClues = new List<ushort>[0];
 		}
-
-		#endregion Constructors
-
-		#region Public Properties
 
 		/// <summary>
 		/// An array of column clues for the puzzle.
@@ -135,7 +129,7 @@ namespace LogiSolver.Core
 		/// <summary>
 		/// The grid of the puzzle containing the states of each cell in 2D array
 		/// </summary>
-		public CellGrid Grid { get; private set; }
+		public Grid<CellState> Grid { get; private set; }
 
 		/// <summary>
 		/// Returns how many rows does the puzzle grid have
@@ -156,20 +150,21 @@ namespace LogiSolver.Core
 			{
 				for (int row = 0; row < RowCount; row++)
 				{
-					if (!RowSolved(row)) return false;
+					if (!RowSolved(row))
+					{
+						return false;
+					}
 				}
 				for (int col = 0; col < ColumnCount; col++)
 				{
-					if (!ColumnSolved(col)) return false;
+					if (!ColumnSolved(col))
+					{
+						return false;
+					}
 				}
-
 				return true;
 			}
 		}
-
-		#endregion Public Properties
-
-		#region Public Methods
 
 		/// <summary>
 		/// Sets the state of a cell in a given row and column
@@ -190,14 +185,21 @@ namespace LogiSolver.Core
 		public bool RowSolved(int row)
 		{
 			List<ushort> list = new List<ushort> { 0 };
-			foreach (var cell in Grid.CellsInRow(row))
+			foreach (CellState cell in Grid.GetRow(row))
 			{
 				if (cell == CellState.FilledIn)
+				{
 					list[^1]++;
+				}
 				else if (list[^1] > 0)
+				{
 					list.Add(0);
+				}
 			}
-			if (list[^1] == 0) list.RemoveAt(list.Count - 1);
+			if (list[^1] == 0)
+			{
+				list.RemoveAt(list.Count - 1);
+			}
 			return list.SequenceEqual(RowClues[row]);
 		}
 
@@ -209,17 +211,22 @@ namespace LogiSolver.Core
 		public bool ColumnSolved(int col)
 		{
 			List<ushort> list = new List<ushort> { 0 };
-			foreach (var cell in Grid.CellsInColumn(col))
+			foreach (CellState cell in Grid.GetColumn(col))
 			{
 				if (cell == CellState.FilledIn)
+				{
 					list[^1]++;
+				}
 				else if (list[^1] > 0)
+				{
 					list.Add(0);
+				}
 			}
-			if (list[^1] == 0) list.RemoveAt(list.Count - 1);
+			if (list[^1] == 0)
+			{
+				list.RemoveAt(list.Count - 1);
+			}
 			return list.SequenceEqual(ColumnClues[col]);
 		}
-
-		#endregion Public Methods
 	}
 }

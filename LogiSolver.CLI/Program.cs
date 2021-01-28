@@ -1,18 +1,16 @@
 ﻿using LogiSolver.Core;
 using System;
-using System.Resources;
+using static LogiSolver.Core.Puzzle;
 
 namespace LogiSolver.CLI
 {
-
 	internal class Program
 	{
-		private static void Main(string[] args)
+		private static void Main(/* string[] args */)
 		{
-			string prevTitle = Console.Title;
 			Console.Title = "LogiSolver";
 			Console.Clear();
-            Puzzle puzzle = Puzzle.Manager.Load("puzzle.logi") ?? new Puzzle(false);
+			Puzzle puzzle = Puzzle.Manager.Load("puzzle.logi") ?? new Puzzle(false);
 			bool exit = false;
 			int selectedRow = 0;
 			int selectedCol = 0;
@@ -20,7 +18,7 @@ namespace LogiSolver.CLI
 			Console.CancelKeyPress += delegate { Environment.Exit(0); };
 			PuzzlePrinter printer = new PuzzlePrinter();
 			printer.Print(puzzle, selectedRow, selectedCol);
-			
+
 			while (!exit)
 			{
 				if (puzzle.Solved)
@@ -80,7 +78,6 @@ namespace LogiSolver.CLI
 						break;
 				}
 			}
-			//Console.Title = prevTitle;
 			Console.WriteLine();
 		}
 	}

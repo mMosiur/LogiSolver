@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\LogiSolver Core\LogiSolver Core.csproj" />
+    <ProjectReference Include="..\LogiSolver.Core\LogiSolver.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>

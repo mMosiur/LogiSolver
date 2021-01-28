@@ -69,8 +69,10 @@
 		</Style.Triggers>
 	</Style>
 
-	<!--  -->
+	<!-- Main Menu Button -->
 	<Style TargetType="{x:Type Button}" x:Key="MainMenuButton">
+		<Setter Property="Width" Value="100"/>
+		<Setter Property="Height" Value="50"/>
 		<Setter Property="FontSize" Value="14"/>
 		<Setter Property="Background" Value="{StaticResource BackgroundDarkBrush}" />
 		<Setter Property="Padding" Value="8" />
